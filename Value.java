@@ -1,27 +1,24 @@
-public class Value {
-    private String value;
-    private Value next;
+public class Value<TYPE> {
+  private TYPE value;
+  private Value<TYPE> next;
 
-    public Value(String _value)
-    {
-        this.value = _value;
-    }
+  public Value(TYPE _value) {
+    this.value = _value;
+  }
 
-    public Value getNext() {
-        return next;
-    }
+  public Value<TYPE> getNext() {
+    return next;
+  }
 
-    public void setNext(Value next) {
-        this.next = next;
-    }
+  public void setNext(Value<TYPE> next) {
+    this.next = next;
+  }
 
-    public String getValue() {
-        return value;
-    }
+  public TYPE getValue() {
+    return value;
+  }
 
-    public void setValue(String values) {
-        this.value = values;
-    }
-
-
+  public void setValue(TYPE values) {
+    this.value = values;
+  }
 }

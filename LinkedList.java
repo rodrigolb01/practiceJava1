@@ -1,10 +1,16 @@
-public class LinkedList {
-  private Value first;
-  private Value last;
+import java.lang.reflect.Type;
+
+public class LinkedList<TYPE> {
+  private Value<TYPE> first;
+  private Value<TYPE> last;
   private int size;
 
-  public void add(String val) {
-    Value v = new Value(val);
+  public LinkedList() {
+    this.size = 0;
+  }
+
+  public void add(TYPE val) {
+    Value<TYPE> v = new Value<TYPE>(val);
 
     if (this.first == null && this.last == null) {
       this.first = v;
@@ -17,10 +23,10 @@ public class LinkedList {
   }
 
   public void remove(String val) {
-    Value previous = null;
-    Value current = this.getFirst();
+    Value<TYPE> previous = null;
+    Value<TYPE> current = this.getFirst();
     for (int i = 0; i < getSize(); i++) {
-      if (current.getValue().equalsIgnoreCase(val)) {
+      if (current.getValue().equals(val)) {
         if (this.getSize() == 1) {
           this.setFirst(null);
           this.setLast(null);
@@ -42,7 +48,7 @@ public class LinkedList {
     }
   }
 
-  public Value get(int pos) {
+  public Value<TYPE> get(int pos) {
     Value current = getFirst();
     for (int i = 0; i < pos; i++) {
       if (current.getNext() != null) {
@@ -52,19 +58,19 @@ public class LinkedList {
     return current;
   }
 
-  public Value getFirst() {
+  public Value<TYPE> getFirst() {
     return first;
   }
 
-  public void setFirst(Value first) {
+  public void setFirst(Value<TYPE> first) {
     this.first = first;
   }
 
-  public Value getLast() {
+  public Value<TYPE> getLast() {
     return last;
   }
 
-  public void setLast(Value last) {
+  public void setLast(Value<TYPE> last) {
     this.last = last;
   }
 
