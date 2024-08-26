@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class App {
 
   public static void main(String[] args) {
@@ -53,33 +55,50 @@ public class App {
     //   );
     // }
 
-    // LinkedList<Integer> list2 = new LinkedList<Integer>();
-    // System.out.println("current size: " + list2.getSize());
-    // list2.add(1);
-    // list2.add(2);
-    // list2.add(3);
-    // System.out.println("current size: " + list2.getSize());
-    // for (int i = 0; i < list2.getSize(); i++) {
+    LinkedList<Integer> list2 = new LinkedList<Integer>();
+
+    for (int i = 0; i < 10000; i++) {
+      list2.add(i);
+    }
+
+    long startTime = System.currentTimeMillis();
+    for (int i = 0; i < list2.getSize(); i++) {
+      // System.out.println(
+      //   "value in position " + i + " : " + list2.get(i).getValue()
+      // );
+      list2.get(i);
+    }
+    long endTime = System.currentTimeMillis();
+    long elapsedTime = endTime - startTime;
+    System.out.println(
+      "The elapsed time for acessing was: " + elapsedTime + " miliseconds."
+    );
+
+    startTime = System.currentTimeMillis();
+    ArrayList<Integer> al = new ArrayList<Integer>();
+    for (int i = 0; i < 10000; i++) {
+      al.add(i);
+    }
+    endTime = System.currentTimeMillis();
+    elapsedTime = endTime - startTime;
+    System.out.println(
+      "The elapsed time for acessing was: " + elapsedTime + " miliseconds."
+    );
+    // LinkedList<Employee> list3 = new LinkedList<Employee>();
+    // System.out.println("current size: " + list3.getSize());
+
+    // Employee e1 = new Employee("Joe Doe", 33);
+    // Employee e2 = new Employee("John Doe", 23);
+    // Employee e3 = new Employee("Poe Doe", 32);
+
+    // list3.add(e1);
+    // list3.add(e2);
+    // list3.add(e3);
+    // System.out.println("current size: " + list3.getSize());
+    // for (int i = 0; i < list3.getSize(); i++) {
     //   System.out.println(
-    //     "value in position " + i + " : " + list2.get(i).getValue()
+    //     "value in position " + i + " : \n" + list3.get(i).getValue()
     //   );
     // }
-
-    LinkedList<Employee> list3 = new LinkedList<Employee>();
-    System.out.println("current size: " + list3.getSize());
-
-    Employee e1 = new Employee("Joe Doe", 33);
-    Employee e2 = new Employee("John Doe", 23);
-    Employee e3 = new Employee("Poe Doe", 32);
-
-    list3.add(e1);
-    list3.add(e2);
-    list3.add(e3);
-    System.out.println("current size: " + list3.getSize());
-    for (int i = 0; i < list3.getSize(); i++) {
-      System.out.println(
-        "value in position " + i + " : \n" + list3.get(i).getValue()
-      );
-    }
   }
 }
