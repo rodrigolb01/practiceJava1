@@ -1,5 +1,3 @@
-import java.lang.reflect.Type;
-
 public class LinkedList<TYPE> {
   private Value<TYPE> first;
   private Value<TYPE> last;
@@ -20,6 +18,10 @@ public class LinkedList<TYPE> {
       this.last = v;
     }
     size++;
+  }
+
+  public LinkedListIterator<TYPE> getIterator() {
+    return new LinkedListIterator<TYPE>(this.first);
   }
 
   public void remove(String val) {

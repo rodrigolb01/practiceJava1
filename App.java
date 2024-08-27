@@ -55,6 +55,7 @@ public class App {
     //   );
     // }
 
+    // NORMAL LINKED LIST//
     LinkedList<Integer> list2 = new LinkedList<Integer>();
 
     for (int i = 0; i < 10000; i++) {
@@ -71,18 +72,50 @@ public class App {
     long endTime = System.currentTimeMillis();
     long elapsedTime = endTime - startTime;
     System.out.println(
-      "The elapsed time for acessing was: " + elapsedTime + " miliseconds."
+      "The elapsed time for acessing linked list was: " +
+      elapsedTime +
+      " miliseconds."
     );
+
+    // LINKED LIST WITH ITERATOR //
+
+    LinkedList<Integer> l2Iterate = new LinkedList<Integer>();
+
+    startTime = System.currentTimeMillis();
+    for (int i = 0; i < 10000; i++) {
+      l2Iterate.add(i);
+    }
+
+    LinkedListIterator<Integer> iterator = l2Iterate.getIterator();
+
+    while (iterator.nextexists()) {
+      iterator.getNext();
+    }
+    endTime = System.currentTimeMillis();
+    elapsedTime = endTime - startTime;
+    System.out.println(
+      "The elapsed time for acessing linked list with interation was: " +
+      elapsedTime +
+      " miliseconds."
+    );
+
+    // ARRAY LIST//
 
     startTime = System.currentTimeMillis();
     ArrayList<Integer> al = new ArrayList<Integer>();
     for (int i = 0; i < 10000; i++) {
       al.add(i);
     }
+
+    for (int i = 0; i < al.size(); i++) {
+      al.get(i);
+    }
     endTime = System.currentTimeMillis();
     elapsedTime = endTime - startTime;
     System.out.println(
-      "The elapsed time for acessing was: " + elapsedTime + " miliseconds."
+      "The elapsed time for acessing arraylist was: " +
+      elapsedTime +
+      " miliseconds."
     );
     // LinkedList<Employee> list3 = new LinkedList<Employee>();
     // System.out.println("current size: " + list3.getSize());
