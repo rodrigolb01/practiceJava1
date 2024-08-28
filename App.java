@@ -3,6 +3,32 @@ import java.util.Scanner;
 
 public class App {
 
+  static int[] insertionSort(int[] arr) {
+    for (int i = 1; i < arr.length; i++) {
+      int temp = i;
+      int j = i - 1;
+      while (j >= 0 && i - 1 < arr[j]) {
+        arr[j + 1] = arr[j];
+        j--;
+      }
+      arr[j + 1] = temp;
+    }
+    return arr;
+  }
+
+  static int[] bubbleSort(int[] arr) {
+    for (int i = 0; i < arr.length; i++) {
+      for (int j = i + 1; j < arr.length; j++) {
+        if (arr[j] < arr[i]) {
+          int temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+      }
+    }
+    return arr;
+  }
+
   static int binarySearch(int target, int[] arr) {
     int start = 0;
     int end = arr.length - 1;
@@ -28,20 +54,37 @@ public class App {
   }
 
   public static void main(String[] args) {
-    int[] list = new int[10];
-    for (int i = 0; i < 10; i++) {
-      list[i] = i * 2;
+    // TESTING SORTING ALGORITHIMS
+    int[] arr = new int[10];
+    for (int i = 0; i < arr.length; i++) {
+      arr[i] = (int) (Math.random() * 10);
     }
-
-    for (int i = 0; i < list.length; i++) {
-      System.out.println(list[i]);
+    for (int i = 0; i < arr.length; i++) {
+      System.out.println(arr[i]);
     }
+    // arr = bubbleSort(arr);
+    arr = insertionSort(arr);
+    System.out.println("sorted:");
+    for (int i = 0; i < arr.length; i++) {
+      System.out.println(arr[i]);
+    }
+    // // TESTING BINARY SEARCH
+    // int[] list = new int[10];
+    // for (int i = 0; i < 10; i++) {
+    //   list[i] = i * 2;
+    // }
 
-    Scanner sc = new Scanner(System.in);
-    System.out.println("find number: ");
-    int target = sc.nextInt();
-    int res = binarySearch(target, list);
-    System.out.println("number " + target + " found in position " + res);
+    // for (int i = 0; i < list.length; i++) {
+    //   System.out.println(list[i]);
+    // }
+
+    // Scanner sc = new Scanner(System.in);
+    // System.out.println("find number: ");
+    // int target = sc.nextInt();
+    // int res = binarySearch(target, list);
+    // System.out.println("number " + target + " found in position " + res);
+    // sc.close();
+
     // int[] arr1 = {1,2,3,4,5};
     // NormalList l = new NormalList(arr1);
     // l.print();
