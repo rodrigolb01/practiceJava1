@@ -3,6 +3,22 @@ import java.util.Scanner;
 
 public class App {
 
+  static int[] selectionSort(int[] arr) {
+    int smaller, temp;
+    for (int i = 0; i < arr.length; i++) {
+      smaller = i;
+      for (int j = i + 1; j < arr.length; j++) {
+        if (arr[j] < arr[smaller]) {
+          smaller = j;
+        }
+      }
+      temp = arr[smaller];
+      arr[smaller] = arr[i];
+      arr[i] = temp;
+    }
+    return arr;
+  }
+
   static int[] insertionSort(int[] arr) {
     for (int i = 1; i < arr.length; i++) {
       int temp = i;
@@ -63,7 +79,8 @@ public class App {
       System.out.println(arr[i]);
     }
     // arr = bubbleSort(arr);
-    arr = insertionSort(arr);
+    // arr = insertionSort(arr);
+    arr = selectionSort(arr);
     System.out.println("sorted:");
     for (int i = 0; i < arr.length; i++) {
       System.out.println(arr[i]);
