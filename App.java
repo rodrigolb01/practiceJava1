@@ -3,6 +3,41 @@ import java.util.Scanner;
 
 public class App {
 
+  static int[] heapSort(int[] arr) {
+    int n = arr.length;
+    for (int i = n / 2 - 1; i >= 0; i--) {
+      heap(arr, i, n);
+    }
+    for (int i = n - 1; i > 0; i--) {
+      int temp = arr[i];
+      arr[0] = arr[i];
+      arr[i] = temp;
+
+      heap(arr, i, 0);
+    }
+    return arr;
+  }
+
+  private static void heap(int[] arr, int i, int n) {
+    int root = i;
+    int right = (i * 2) + 2;
+    int left = (i * 2) + 1;
+
+    if (left < n && arr[left] > arr[root]) {
+      root = left;
+    }
+    if (right < n && arr[right] > arr[root]) {
+      root = right;
+    }
+
+    if (root != i) {
+      int temp = arr[i];
+      arr[i] = arr[root];
+      arr[root] = temp;
+      heap(arr, root, n);
+    }
+  }
+
   static int[] selectionSort(int[] arr) {
     int smaller, temp;
     for (int i = 0; i < arr.length; i++) {
@@ -80,7 +115,8 @@ public class App {
     }
     // arr = bubbleSort(arr);
     // arr = insertionSort(arr);
-    arr = selectionSort(arr);
+    // arr = selectionSort(arr);
+    arr = heapSort(arr);
     System.out.println("sorted:");
     for (int i = 0; i < arr.length; i++) {
       System.out.println(arr[i]);
