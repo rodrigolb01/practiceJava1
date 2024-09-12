@@ -1,9 +1,48 @@
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
 
-  static int[] heapSort(int[] arr) {
+  static Result quicksort(int[] arr, int left, int right) {
+    int swaps = 0;
+    if (left < right) {
+      int p = partition(arr, left, right); //achar novo pivo
+      quicksort(arr, left, p);
+      quicksort(arr, p + 1, right);
+    }
+    return new Result(swaps, arr);
+  }
+
+  static int partitionSwaps = 0;
+
+  private static int partition(int[] arr, int left, int right) {
+    int mid = (int) (right + left) / 2;
+    int pivot = arr[mid];
+    int i = left - 1;
+    int j = right + 1;
+
+    while (true) {
+      do {
+        i++;
+      } while (arr[i] < pivot);
+      do {
+        j--;
+      } while (arr[j] > pivot);
+      if (i >= j) {
+        return j;
+      }
+      int temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+      partitionSwaps++;
+    }
+  }
+
+  static int heapSwaps = 0;
+
+  static Result heapSort(int[] arr) {
+    int swaps = 0;
     int n = arr.length;
     for (int i = n / 2 - 1; i >= 0; i--) {
       heap(arr, i, n);
@@ -12,10 +51,11 @@ public class App {
       int temp = arr[i];
       arr[0] = arr[i];
       arr[i] = temp;
+      heapSwaps++;
 
       heap(arr, i, 0);
     }
-    return arr;
+    return new Result(swaps, arr);
   }
 
   private static void heap(int[] arr, int i, int n) {
@@ -34,11 +74,13 @@ public class App {
       int temp = arr[i];
       arr[i] = arr[root];
       arr[root] = temp;
+      heapSwaps++;
       heap(arr, root, n);
     }
   }
 
-  static int[] selectionSort(int[] arr) {
+  static Result selectionSort(int[] arr) {
+    int swaps = 0;
     int smaller, temp;
     for (int i = 0; i < arr.length; i++) {
       smaller = i;
@@ -50,34 +92,41 @@ public class App {
       temp = arr[smaller];
       arr[smaller] = arr[i];
       arr[i] = temp;
+      swaps++;
     }
-    return arr;
+    return new Result(swaps, arr);
   }
 
-  static int[] insertionSort(int[] arr) {
+  static Result insertionSort(int[] arr) {
+    int swaps = 0;
+
     for (int i = 1; i < arr.length; i++) {
       int temp = i;
       int j = i - 1;
       while (j >= 0 && i - 1 < arr[j]) {
         arr[j + 1] = arr[j];
         j--;
+        swaps++;
       }
       arr[j + 1] = temp;
+      swaps++;
     }
-    return arr;
+    return new Result(swaps, arr);
   }
 
-  static int[] bubbleSort(int[] arr) {
+  static Result bubbleSort(int[] arr) {
+    int swaps = 0;
     for (int i = 0; i < arr.length; i++) {
       for (int j = i + 1; j < arr.length; j++) {
         if (arr[j] < arr[i]) {
           int temp = arr[i];
           arr[i] = arr[j];
           arr[j] = temp;
+          swaps++;
         }
       }
     }
-    return arr;
+    return new Result(swaps, arr);
   }
 
   static int binarySearch(int target, int[] arr) {
@@ -105,22 +154,121 @@ public class App {
   }
 
   public static void main(String[] args) {
-    // TESTING SORTING ALGORITHIMS
-    int[] arr = new int[10];
-    for (int i = 0; i < arr.length; i++) {
-      arr[i] = (int) (Math.random() * 10);
-    }
-    for (int i = 0; i < arr.length; i++) {
-      System.out.println(arr[i]);
-    }
-    // arr = bubbleSort(arr);
-    // arr = insertionSort(arr);
-    // arr = selectionSort(arr);
-    arr = heapSort(arr);
-    System.out.println("sorted:");
-    for (int i = 0; i < arr.length; i++) {
-      System.out.println(arr[i]);
-    }
+    BinaryTree<Integer> t = new BinaryTree<Integer>();
+    t.add(10);
+    t.add(8);
+    t.add(5);
+    t.add(9);
+    t.add(7);
+    t.add(18);
+    t.add(13);
+    t.add(20);
+    System.out.println("arvore em ordem:");
+    t.printInOrder(t.getRoot());
+    // // TESTING SORTING ALGORITHMS AND COMPARING RUNTIME
+
+    // int[] arr = new int[10];
+    // System.out.println("unsorted: ");
+
+    // for (int i = 0; i < arr.length; i++) {
+    //   arr[i] = (int) (Math.random() * 10);
+    //   System.out.print(arr[i] + ", ");
+    // }
+    // System.out.println();
+
+    // //Bubble Sort
+    // System.out.println("Bubble Sort: \n");
+    // System.out.println("sorted:");
+    // long startTime = System.currentTimeMillis();
+    // Result res = bubbleSort(arr.clone());
+    // long endTime = System.currentTimeMillis();
+
+    // for (int i = 0; i < arr.length; i++) {
+    //   System.out.print(res.getArr()[i] + ", ");
+    // }
+    // System.out.println();
+
+    // System.out.println();
+    // System.out.println("Sorting time: " + (endTime - startTime));
+    // System.out.println("Number of swaps: " + res.getSwaps());
+    // System.out.println();
+
+    // //Insertion Sort
+    // System.out.println();
+
+    // System.out.println("Insertion Sort: \n");
+    // System.out.println("sorted:");
+
+    // startTime = System.currentTimeMillis();
+    // res = insertionSort(arr.clone());
+    // endTime = System.currentTimeMillis();
+
+    // for (int i = 0; i < arr.length; i++) {
+    //   System.out.print(res.getArr()[i] + ", ");
+    // }
+    // System.out.println();
+
+    // System.out.println();
+    // System.out.println("Sorting time: " + (endTime - startTime));
+    // System.out.println("Number of swaps: " + res.getSwaps());
+
+    // //Selection Sort
+    // System.out.println();
+
+    // System.out.println("Selection Sort: \n");
+    // System.out.println("sorted:");
+
+    // startTime = System.currentTimeMillis();
+    // res = selectionSort(arr.clone());
+    // endTime = System.currentTimeMillis();
+
+    // for (int i = 0; i < arr.length; i++) {
+    //   System.out.print(res.getArr()[i] + ", ");
+    // }
+    // System.out.println();
+
+    // System.out.println();
+    // System.out.println("Sorting time: " + (endTime - startTime));
+    // System.out.println("Number of swaps: " + res.getSwaps());
+
+    // //Heap Sort
+    // System.out.println();
+
+    // System.out.println("Heap Sort: \n");
+    // System.out.println("sorted:");
+
+    // startTime = System.currentTimeMillis();
+    // res = heapSort(arr.clone());
+    // endTime = System.currentTimeMillis();
+
+    // for (int i = 0; i < arr.length; i++) {
+    //   System.out.print(res.getArr()[i] + ", ");
+    // }
+    // System.out.println();
+
+    // System.out.println();
+    // System.out.println("Sorting time: " + (endTime - startTime));
+    // System.out.println("Number of swaps: " + heapSwaps);
+
+    // //QuickSort
+    // System.out.println();
+
+    // System.out.println("Quick Sort: \n");
+    // System.out.println("sorted:");
+
+    // startTime = System.currentTimeMillis();
+    // res = quicksort(arr.clone(), 0, arr.length);
+    // endTime = System.currentTimeMillis();
+
+    // for (int i = 0; i < arr.length; i++) {
+    //   System.out.print(res.getArr()[i] + ", ");
+    // }
+    // System.out.println();
+
+    // System.out.println();
+    // System.out.println("Sorting time: " + (endTime - startTime));
+    // System.out.println("Number of swaps: " + partitionSwaps);
+
     // // TESTING BINARY SEARCH
     // int[] list = new int[10];
     // for (int i = 0; i < 10; i++) {
