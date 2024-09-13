@@ -163,6 +163,19 @@ public class App {
     t.add(18);
     t.add(13);
     t.add(20);
+
+    System.out.println("arvore em ordem:");
+    t.printInOrder(t.getRoot());
+
+    System.out.println("removido 7");
+    t.remove(7);
+
+    System.out.println("arvore em ordem:");
+    t.printInOrder(t.getRoot());
+
+    System.out.println("removido 10");
+    t.remove(10);
+
     System.out.println("arvore em ordem:");
     t.printInOrder(t.getRoot());
     // // TESTING SORTING ALGORITHMS AND COMPARING RUNTIME
