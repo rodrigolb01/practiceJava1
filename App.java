@@ -154,30 +154,46 @@ public class App {
   }
 
   public static void main(String[] args) {
-    BinaryTree<Integer> t = new BinaryTree<Integer>();
-    t.add(10);
-    t.add(8);
-    t.add(5);
-    t.add(9);
-    t.add(7);
-    t.add(18);
-    t.add(13);
-    t.add(20);
+    // GRAPHS TESTING
+    Graph<String> people = new Graph<String>();
+    people.addNode("Joao");
+    people.addNode("Lorenzo");
+    people.addNode("Creuza");
+    people.addNode("Cleber");
+    people.addNode("Claudio");
 
-    System.out.println("arvore em ordem:");
-    t.printInOrder(t.getRoot());
+    people.addEdge(2.0, "Joao", "Lorenzo");
+    people.addEdge(3.0, "Lorenzo", "Cleber");
+    people.addEdge(1.0, "Cleber", "Creuza");
+    people.addEdge(1.0, "Joao", "Creuza");
+    people.addEdge(2.0, "Claudio", "Lorenzo");
+    people.addEdge(3.0, "Joao", "Joao");
 
-    System.out.println("removido 7");
-    t.remove(7);
+    people.breadthFirstSearch();
+    // BinaryTree<Integer> t = new BinaryTree<Integer>();
+    // t.add(10);
+    // t.add(8);
+    // t.add(5);
+    // t.add(9);
+    // t.add(7);
+    // t.add(18);
+    // t.add(13);
+    // t.add(20);
 
-    System.out.println("arvore em ordem:");
-    t.printInOrder(t.getRoot());
+    // System.out.println("arvore em ordem:");
+    // t.printInOrder(t.getRoot());
 
-    System.out.println("removido 10");
-    t.remove(10);
+    // System.out.println("removido 7");
+    // t.remove(7);
 
-    System.out.println("arvore em ordem:");
-    t.printInOrder(t.getRoot());
+    // System.out.println("arvore em ordem:");
+    // t.printInOrder(t.getRoot());
+
+    // System.out.println("removido 10");
+    // t.remove(10);
+
+    // System.out.println("arvore em ordem:");
+    // t.printInOrder(t.getRoot());
     // // TESTING SORTING ALGORITHMS AND COMPARING RUNTIME
 
     // int[] arr = new int[10];
